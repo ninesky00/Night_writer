@@ -1,4 +1,4 @@
-class NightWriter
+class NightRead
   def initialize
     @string_text = ""
   end

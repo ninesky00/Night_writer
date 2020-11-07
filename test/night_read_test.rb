@@ -1,24 +1,24 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/night_writer'
+require './lib/night_read'
 
-class NightWriterTest < MiniTest::Test
+class NightReadTest < MiniTest::Test
   def setup
-    @night_writer = NightWriter.new
+    @night_read = NightRead.new
     ARGV[0] = 'message.txt'
   end
 
   def test_attributes_are_instantiated
-    assert_instance_of NightWriter, @night_writer
+    assert_instance_of NightRead, @night_read
   end
 
   def test_can_read_argument_file
-    assert_equal "hello world", @night_writer.read
+    assert_equal "hello world", @night_read.read
   end
   
   def test_can_translate_text_into_braille
-    @night_writer.read
-    assert_equal %w(0. 00 ..), @night_writer.translate
+    @night_read.read
+    assert_equal %w(0. 00 ..), @night_read.translate
   end
 
   def test_can_write_to_argument_file
