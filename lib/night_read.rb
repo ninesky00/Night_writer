@@ -1,13 +1,8 @@
 class NightRead
-  def initialize
-    @string_text = ""
-  end
-
-  def read
-    file = File.open(ARGV[0], "r")
+  def read(file_name)
+    file = File.open(file_name, "r")
     text = file.read()
     file.close
-    @string_text = text
+    text
   end
-
 end
