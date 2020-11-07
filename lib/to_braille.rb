@@ -15,4 +15,12 @@ class ToBraille
   "numbers" => %w(.0 .0 00)
                         }
   end
+
+  def translate(string)
+    braille_array = []
+    string.each_char do |char|
+      braille_array << @translation_hash[char]
+    end
+    braille_array
+  end
 end
