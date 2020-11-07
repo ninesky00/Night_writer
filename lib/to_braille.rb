@@ -24,7 +24,7 @@ class ToBraille
     braille_array
   end
 
-  def write(string)
+  def convert_to_write(string)
     line1, line2, line3 = "", "", ""
     output = translate(string)
     output.each do |braille|
