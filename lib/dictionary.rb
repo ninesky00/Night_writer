@@ -1,6 +1,6 @@
-class ToEnlgish
-  def initialize
-  @translation_hash = {
+module Dictionary
+  def translation_hash
+  translation_hash = {
     "a" => %w(0. .. ..), "b" => %w(0. 0. ..), "c" => %w(00 .. ..),
     "d" => %w(00 .0 ..), "e" => %w(0. .0 ..), "f" => %w(00 0. ..),
     "g" => %w(00 00 ..), "h" => %w(0. 00 ..), "i" => %w(.0 0. ..),
@@ -15,5 +15,14 @@ class ToEnlgish
     "numbers" => %w(.0 .0 00)
                           }
   end
-  
+
+  def translate_to_braille(string)
+    hash = translation_hash
+    braille_array = []
+    string.each_char do |char|
+      braille_array << hash[char]
+    end
+    braille_array
+  end
+
 end
