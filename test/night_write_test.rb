@@ -5,7 +5,7 @@ require './lib/night_write'
 class NightWriteTest < MiniTest::Test
   def setup
     @night_write = NightWrite.new
-    @text = ["0.0.0.0.0.", "00.00.0..0", "....0.0.0."]
+    @text = "0.0.0.0.0.\n00.00.0..0\n....0.0.0.\n"
     @file = "test_file.txt"
   end
 

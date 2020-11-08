@@ -18,7 +18,7 @@ class ToBrailleTest < MiniTest::Test
   end
 
   def test_can_write_braille
-    expected = ["0.0.0.0.0.", "00.00.0..0", "....0.0.0."]
+    expected = "0.0.0.0.0.\n00.00.0..0\n....0.0.0.\n"
     assert_equal expected, @translate.convert_to_write(@string_text)
   end
 end

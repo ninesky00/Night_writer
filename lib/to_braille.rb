@@ -23,15 +23,19 @@ class ToBraille
     end
     braille_array
   end
-
+  
   def convert_to_write(string)
-    line1, line2, line3 = "", "", ""
     output = translate(string)
-    output.each do |braille|
-      line1 += braille[0]
-      line2 += braille[1]
-      line3 += braille[2]
-    end
-    [line1, line2, line3]
+    line1 = output.transpose[0].join
+    line2 = output.transpose[1].join
+    line3 = output.transpose[2].join
+    # line1, line2, line3 = "", "", ""
+    # output = translate(string)
+    # output.each do |braille|
+    #   line1 += braille[0]
+    #   line2 += braille[1]
+    #   line3 += braille[2]
+    # end
+    writing_string = line1 + "\n" + line2 + "\n" + line3 + "\n"
   end
 end
