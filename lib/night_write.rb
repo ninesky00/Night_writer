@@ -20,15 +20,15 @@ class NightWrite
     writing_string = line1 + "\n" + line2 + "\n" + line3 + "\n"
   end
 
-  def limit_to_80_characters_writing(string)
+  def formatted_writing(string)
     if string.length <= 40
       output = convert_to_write(string)
       write(output, @destination)
     else 
       first40 = string.slice(0..39)
       rest = string.slice(40..-1)
-      limit_to_80_characters_writing(first40)
-      limit_to_80_characters_writing(rest)
+      formatted_writing(first40)
+      formatted_writing(rest)
     end
   end
 end
