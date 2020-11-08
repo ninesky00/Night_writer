@@ -1,4 +1,4 @@
-require './lib/to_english'
+require './lib/dictionary'
 
 class NightWrite
   include Dictionary
