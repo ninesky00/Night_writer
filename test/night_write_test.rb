@@ -38,7 +38,6 @@ class NightWriteTest < MiniTest::Test
   end
 
   def test_can_break_new_line_when_output_is_too_long
-    # skip
     @night_write2.formatted_writing(@long_string)
     expected = ".00..0.0...0.0..0...000.0..000..0.000...000.0.0.0.00.00.0....0.00..00000...00..0\n" +
     "00000.0...0.0.......0..00000.0...0.0.0....00..00....00.000..0.00000..000..00.00.\n" +
