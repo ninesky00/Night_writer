@@ -17,8 +17,15 @@ class ToBrailleTest < MiniTest::Test
     assert_equal expected, @translate.translate(@string_text)
   end
 
-  def test_can_write_braille
+  def test_can_convert_to_write_braille
     expected = "0.0.0.0.0.\n00.00.0..0\n....0.0.0.\n"
     assert_equal expected, @translate.convert_to_write(@string_text)
+  end
+
+  def test_can_break_new_line_when_output_is_too_long
+    expected = "0.0.0.0.0......00..0.0...0.0..0...0.0.0000...0.00..00000...00..0.0...00....00.0\n" +
+    "00.00.0..00...00000.0...0.0.......0..0.000..0.00000..000..00.00.00..0..0..0000.\n" +
+    "....0.0.0.....0.....0.....0.......0.0.0.....0.0.0...0.....0...0.0...0.0...0...."
+    assert_equal expected, @translate.limit_to_80_characters
   end
 end
