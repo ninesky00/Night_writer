@@ -38,4 +38,17 @@ class ToBraille
     # end
     writing_string = line1 + "\n" + line2 + "\n" + line3 + "\n"
   end
+
+  def limit_to_80_characters(string)
+    if translate(string).length <= 40
+      output = convert_to_write(string)
+    else 
+      first40 = translate(string).slice(0..39)
+      rest = string.slice(40..-1)
+      limit_to_80_characters(rest)
+      # require 'pry';binding.pry
+      # rest = translate(string).slice(40..-1)
+      # limit_to_80_characters(rest)
+    end
+  end
 end
