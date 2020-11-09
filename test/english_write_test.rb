@@ -22,6 +22,14 @@ class EnglishWriteTest < MiniTest::Test
     assert_equal "h", @english_write.translate_to_english(@braille_text)
   end
 
+  def test_can_combine_multipline_braille_input_into_three
+    @braille_text = @reader.read(@file3)
+    expected = [".00..0.0...0.0..0...000.0..000..0.000...000.0.0.0.00.00.0....0.00..00000...00..0.0",
+      "00000.0...0.0.......0..00000.0...0.0.0....00..00....00.000..0.00000..000..00.00.00",
+      "0.....0.....0.........0.0.0.00000.0...........0.....0...0...0.0.0...0.....0...0.0."]
+    assert_equal expected, @english_write.three_line_braille(@braille_text)
+  end
+
   def test_braille_pairs_helper_method
     expected = [["0.", "0.", "0.", "0.", "0."], ["00", ".0", "0.", "0.", ".0"], ["..", "..", "0.", "0.", "0."]]
     assert_equal expected, @english_write.braille_pairs(@braille_text)
