@@ -8,7 +8,7 @@ class NightWriteTest < MiniTest::Test
     @file2 = "./sample_text/test_file2.txt"
     @night_write1 = NightWrite.new(@file1)
     @night_write2 = NightWrite.new(@file2)
-    @text = "0.0.0.0.0.\n00.00.0..0\n....0.0.0.\n"
+    @braille_text = "0.0.0.0.0.\n00.00.0..0\n....0.0.0.\n"
     @string_text = "hello"
     @long_string = "this is a forty-one character string test"
   end
@@ -19,7 +19,7 @@ class NightWriteTest < MiniTest::Test
 
 
   def test_can_write_to_file
-    @night_write1.write(@text, @file1)
+    @night_write1.write(@braille_text, @file1)
     actual = File.open(@file1, "r") do |file|
       file.read()
     end
