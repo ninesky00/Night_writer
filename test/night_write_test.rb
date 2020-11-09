@@ -64,6 +64,6 @@ class NightWriteTest < MiniTest::Test
 
   def test_strings_upcase_count
     @string_text = "Hello World"
-    assert_equal 2, @night_write1.upcase_count
+    assert_equal 2, @night_write1.upcase_count(@string_text)
   end
 end

@@ -20,13 +20,22 @@ class NightWrite
     writing_string = line1 + "\n" + line2 + "\n" + line3 + "\n"
   end
 
+  def upcase_count(string)
+    upcase_count, space_count = 0, 0
+    string.chars do |char|
+      upcase_count += 1 if char == char.upcase
+      space_count += 1 if char == " "
+    end
+    total_count = upcase_count - space_count
+  end
+
   def formatted_writing(string)
-    if string.length <= 40
+    if string.length <= (40 - upcase_count(string))
       output = convert_to_write(string)
       write(output, @destination)
     else 
-      first40 = string.slice(0..39)
-      rest = string.slice(40..-1)
+      first40 = string.slice(0..(39 - upcase_count(string)))
+      rest = string.slice((40 - upcase_count(string))..-1)
       formatted_writing(first40)
       formatted_writing(rest)
     end
