@@ -12,7 +12,7 @@ module Dictionary
     "y" => %w(00 .0 00), "z" => %w(0. .0 00), "!" => %w(.. 00 0.),
     "'" => %w(.. .. 0.), "," => %w(.. 0. ..), "-" => %w(.. .. 00),
     "." => %w(.. 00 .0), "?" => %w(.. 0. 00), " " => %w(.. .. ..),
-    "numbers" => %w(.0 .0 00)
+    "numbers" => %w(.0 .0 00), "capital" => %w(.. .. .0)
                           }
   end
 
@@ -20,7 +20,12 @@ module Dictionary
     hash = translation_hash
     braille_array = []
     string.each_char do |char|
+      if char == char.upcase
+        braille_array << hash["capital"]
+        braille_array << hash[char.downcase]
+      else
       braille_array << hash[char]
+      end
     end
     braille_array
   end
