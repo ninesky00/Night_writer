@@ -7,6 +7,7 @@ class EnglishWriteTest < MiniTest::Test
   def setup
     @file1 = "./sample_text/sample_english.txt"
     @file2 = "./sample_text/sample_braille.txt"
+    @file3 = "./sample_text/test_file2.txt"
     @english_write = EnglishWrite.new(@file1)
     @reader = NightRead.new
     @braille_text = @reader.read(@file2)
@@ -17,7 +18,6 @@ class EnglishWriteTest < MiniTest::Test
   end
 
   def test_can_translate_one_braille_to_english
-    skip
     @braille_text = "0.\n00\n..\n"
     assert_equal "h", @english_write.translate_to_english(@braille_text)
   end
@@ -34,5 +34,10 @@ class EnglishWriteTest < MiniTest::Test
 
   def test_can_translate_braille_string_to_english
     assert_equal "hello", @english_write.translate_to_english(@braille_text)
+  end
+
+  def test_can_translate_long_braille_string_to_english
+    @braille_text = @reader.read(@file3)
+    assert_equal "this is a forty-one character string test", @english_write.translate_to_english(@braille_text)
   end
 end
