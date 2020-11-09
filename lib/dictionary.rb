@@ -25,10 +25,21 @@ module Dictionary
     braille_array
   end
 
+  def three_line_braille(braille_string)
+    top, middle, bottom = [], [], []
+    strings = braille_string.split
+    strings.each_with_index do |string, index|
+      top << string if index % 3 == 0
+      middle << string if index % 3 == 1
+      bottom << string if index % 3 == 2
+    end
+    [top.join, middle.join, bottom.join]
+  end
+
   def braille_pairs(braille_string)
     braille_pairs = []
-    string = braille_string.split
-    string.each do |each|
+    three_lines = three_line_braille(braille_string)
+    three_lines.each do |each|
       braille_pairs << each.scan(/../)
     end
     braille_pairs
