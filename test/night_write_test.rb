@@ -54,4 +54,9 @@ class NightWriteTest < MiniTest::Test
     expected = ["..", "..", ".0"], ["0.", "00", ".."], ["0.", ".0", ".."], ["0.", "0.", "0."], ["0.", "0.", "0."], ["0.", ".0", "0."]
     assert_equal expected, @night_write1.translate_to_braille(@string_text)
   end
+
+  def test_letter_translation_helper_method
+    character = "H"
+    assert_equal ["..", "..", ".0"], ["0.", "00", ".."], @night_write1.letter_converter(character)
+  end
 end
