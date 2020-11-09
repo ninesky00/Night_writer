@@ -25,6 +25,15 @@ module Dictionary
     braille_array
   end
 
+  def translate_to_english(braille_string)
+    hash = translation_hash
+    braille_letters = transpose_letters(braille_string)
+    letters_array = braille_letters.map do |letter|
+      hash.key(letter)
+    end
+    letters_array.join
+  end
+
   def three_line_braille(braille_string)
     top, middle, bottom = [], [], []
     strings = braille_string.split
@@ -49,14 +58,4 @@ module Dictionary
     pairs = braille_pairs(braille_string)
     braille_letters = pairs[0].zip(pairs[1], pairs[2])
   end
-
-  def translate_to_english(braille_string)
-    hash = translation_hash
-    braille_letters = transpose_letters(braille_string)
-    letters_array = braille_letters.map do |letter|
-      hash.key(letter)
-    end
-    letters_array.join
-  end
-
 end
