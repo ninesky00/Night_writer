@@ -34,15 +34,21 @@ module Dictionary
     braille_pairs
   end
   
+  def transpose_letters(braille_string)
+    pairs = braille_pairs(braille_string)
+    braille_letters = pairs[0].zip(pairs[1], pairs[2])
+  end
+
   def translate_to_english(braille_string)
     hash = translation_hash
+    braille_letters = transpose_letters(braille_string)
     # braille_pairs = []
     # string = braille_string.split
     # string.each do |each|
     #   braille_pairs << each.scan(/../)
     # end
+    # braille_letters = braille_pairs[0].zip(braille_pairs[1], braille_pairs[2])
     # require 'pry';binding.pry
-    braille_letters = braille_pairs[0].zip(braille_pairs[1], braille_pairs[2])
     letters_array = braille_letters.map do |letter|
       hash.key(letter)
     end
