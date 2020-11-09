@@ -27,8 +27,16 @@ module Dictionary
 
   def translate_to_english(braille_string)
     hash = translation_hash
-    letter = braille_string.split
-    hash.key(letter)
+    braille_pairs = []
+    string = braille_string.split
+    string.each do |each|
+      braille_pairs << each.scan(/../)
+    end
+    braille_letters = braille_pairs[0].zip(braille_pairs[1], braille_pairs[2])
+    letters_array = braille_letters.map do |letter|
+      hash.key(letter)
+    end
+    letters_array.join
   end
 
 end
