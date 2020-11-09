@@ -61,4 +61,9 @@ class NightWriteTest < MiniTest::Test
     expected = ["..", "..", ".0"], ["0.", "00", ".."], ["0.", ".0", ".."], ["0.", "0.", "0."], ["0.", "0.", "0."], ["0.", ".0", "0."]
     assert_equal expected, @night_write1.translate_to_braille(@string_text)
   end
+
+  def test_strings_upcase_count
+    @string_text = "Hello World"
+    assert_equal 2, @night_write1.upcase_count
+  end
 end
