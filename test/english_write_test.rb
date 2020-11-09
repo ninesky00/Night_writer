@@ -27,6 +27,11 @@ class EnglishWriteTest < MiniTest::Test
     assert_equal expected, @english_write.braille_pairs(@braille_text)
   end
 
+  def test_transpose_braille_pairs_back_to_braille_letters
+    expected = [["0.", "00", ".."], ["0.", ".0", ".."], ["0.", "0.", "0."], ["0.", "0.", "0."], ["0.", ".0", "0."]]
+    assert_equal expected, @english_write.transpose_letters(@braille_text)
+  end
+
   def test_can_translate_braille_string_to_english
     assert_equal "hello", @english_write.translate_to_english(@braille_text)
   end
