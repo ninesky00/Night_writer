@@ -35,6 +35,13 @@ class NightWriteTest < MiniTest::Test
   def test_can_convert_to_write_braille
     expected = "0.0.0.0.0.\n00.00.0..0\n....0.0.0.\n"
     assert_equal expected, @night_write1.convert_to_write(@string_text)
+    
+  end
+
+  def test_can_convert_capital_letters_to_write_braille
+    @string_text = "Hello"
+    expected = "..0.0.0.0.0.\n..00.00.0..0\n.0....0.0.0.\n"
+    assert_equal expected, @night_write1.convert_to_write(@string_text)
   end
 
   def test_can_break_new_line_when_output_is_too_long
@@ -53,10 +60,5 @@ class NightWriteTest < MiniTest::Test
     @string_text = "Hello"
     expected = ["..", "..", ".0"], ["0.", "00", ".."], ["0.", ".0", ".."], ["0.", "0.", "0."], ["0.", "0.", "0."], ["0.", ".0", "0."]
     assert_equal expected, @night_write1.translate_to_braille(@string_text)
-  end
-
-  def test_letter_translation_helper_method
-    character = "H"
-    assert_equal ["..", "..", ".0"], ["0.", "00", ".."], @night_write1.letter_converter(character)
   end
 end
