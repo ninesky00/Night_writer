@@ -17,8 +17,14 @@ class EnglishWriteTest < MiniTest::Test
   end
 
   def test_can_translate_one_braille_to_english
+    skip
     @braille_text = "0.\n00\n..\n"
     assert_equal "h", @english_write.translate_to_english(@braille_text)
+  end
+
+  def test_braille_pairs_helper_method
+    expected = [["0.", "0.", "0.", "0.", "0."], ["00", ".0", "0.", "0.", ".0"], ["..", "..", "0.", "0.", "0."]]
+    assert_equal expected, @english_write.braille_pairs(@braille_text)
   end
 
   def test_can_translate_braille_string_to_english
