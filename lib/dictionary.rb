@@ -42,13 +42,6 @@ module Dictionary
   def translate_to_english(braille_string)
     hash = translation_hash
     braille_letters = transpose_letters(braille_string)
-    # braille_pairs = []
-    # string = braille_string.split
-    # string.each do |each|
-    #   braille_pairs << each.scan(/../)
-    # end
-    # braille_letters = braille_pairs[0].zip(braille_pairs[1], braille_pairs[2])
-    # require 'pry';binding.pry
     letters_array = braille_letters.map do |letter|
       hash.key(letter)
     end
