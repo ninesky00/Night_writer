@@ -25,4 +25,10 @@ module Dictionary
     braille_array
   end
 
+  def translate_to_english(braille_string)
+    hash = translation_hash
+    letter = braille_string.split
+    hash.key(letter)
+  end
+
 end
