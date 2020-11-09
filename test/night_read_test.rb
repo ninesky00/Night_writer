@@ -16,8 +16,4 @@ class NightReadTest < MiniTest::Test
   def test_can_read_argument_file
     assert_equal "hello world", @night_read.read(ARGV[0])
   end
-
-  def test_can_break_braille_text_longer_than_240_to_three_lines
-    assert_equal 3, @night_read.read(@file1).split.count
-  end
 end
