@@ -14,6 +14,6 @@ class NightReadTest < MiniTest::Test
   end
 
   def test_can_read_argument_file
-    assert_equal "hello world", @night_read.read(ARGV[0])
+    assert_equal "Hello World", @night_read.read(ARGV[0])
   end
 end
