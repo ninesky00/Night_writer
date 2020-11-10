@@ -30,7 +30,7 @@ class NightWriteTest < MiniTest::Test
     assert_equal expected, actual
   end
 
-  def test_can_translate_english_to_braille
+  def test_can_translate_english_to_braille #dictionary method
     string_text = "hello"
     expected = %w(0. 00 ..), %w(0. .0 ..), %w(0. 0. 0.), %w(0. 0. 0.), %w(0. .0 0.)
     assert_equal expected, @night_write1.translate_to_braille(string_text)
@@ -61,7 +61,7 @@ class NightWriteTest < MiniTest::Test
     assert_equal expected, actual
   end
 
-  def test_can_indicate_capital_letters
+  def test_can_translate_capital_letters #dictionary method
     caps_string = "Hello"
     expected = %w(.. .. .0), %w(0. 00 ..), %w(0. .0 ..), %w(0. 0. 0.), %w(0. 0. 0.), %w(0. .0 0.)
     assert_equal expected, @night_write1.translate_to_braille(caps_string)
@@ -88,7 +88,7 @@ class NightWriteTest < MiniTest::Test
     assert_equal expected, actual
   end
 
-  def test_can_translate_numbers_to_braille
+  def test_can_translate_numbers_to_braille #dictionary method
     num_string = "5523"
     expected = %w(.0 .0 00), %w(0. .0 ..), %w(0. .0 ..), %w(0. 0. ..), %w(00 .. ..)
     assert_equal expected, @night_write1.translate_to_braille(num_string)
@@ -102,5 +102,10 @@ class NightWriteTest < MiniTest::Test
       file.read()
     end
     assert_equal expected, actual
+  end
+
+  def test_can_count_amount_of_number_switches
+    num_string = "5523"
+    assert_equal 1, @night_write4.number_switch_count(num_string)
   end
 end
