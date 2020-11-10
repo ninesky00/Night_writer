@@ -8,10 +8,12 @@ class NightWriteTest < MiniTest::Test
     @output_file2 = "./sample_text/output_file2.txt"
     @output_file3 = "./sample_text/output_file3.txt"
     @output_file4 = "./sample_text/output_file4.txt"
+    @output_file5 = "./sample_text/output_file5.txt"
     @night_write1 = NightWrite.new(@output_file1)
     @night_write2 = NightWrite.new(@output_file2)
     @night_write3 = NightWrite.new(@output_file3)
     @night_write4 = NightWrite.new(@output_file4)
+    @night_write5 = NightWrite.new(@output_file5)
     #added class instances for the purpose of using file apend instead of file write,
     #need some more time to figure out how to code them interchangeably
     @braille_text = "0.0.0.0.0.\n00.00.0..0\n....0.0.0.\n"
@@ -122,8 +124,18 @@ class NightWriteTest < MiniTest::Test
     assert_equal 4, @night_write4.additional_character_count(funkier_string)
   end
 
-  def test_can_write_integrated_long_string_with_numbers_and_letters
-    longest_string = "This Is Going Bo Be Longer Than 41 Characters."
-
+  def test_can_translate_integrated_long_string_with_numbers_and_letters
+    longest_string = "This Is Going To Be Longer Than 41 Characters."
+    expected = %w(.. .. .0), %w(.0 00 0.), %w(0. 00 ..), %w(.0 0. ..), %w(.0 0. 0.), 
+    %w(.. .. ..), %w(.. .. .0), %w(.0 0. ..), %w(.0 0. 0.), 
+    %w(.. .. ..), %w(.. .. .0), %w(00 00 ..), %w(0. .0 0.), %w(.0 0. ..), %w(00 .0 0.), %w(00 00 ..), 
+    %w(.. .. ..), %w(.. .. .0), %w(.0 00 0.), %w(0. .0 0.), 
+    %w(.. .. ..), %w(.. .. .0), %w(0. 0. ..), %w(0. .0 ..), 
+    %w(.. .. ..), %w(.. .. .0), %w(0. 0. 0.), %w(0. .0 0.), %w(00 .0 0.), %w(00 00 ..), %w(0. .0 ..), %w(0. 00 0.), 
+    %w(.. .. ..), %w(.. .. .0), %w(.0 00 0.), %w(0. 00 ..), %w(0. .. ..), %w(00 .0 0.), 
+    %w(.. .. ..), %w(.0 .0 00), %w(00 .0 ..), %w(0. .. ..), 
+    %w(.. .. ..), %w(.. .. .0), %w(00 .. ..), %w(0. 00 ..), %w(0. .. ..), %w(0. 00 0.), %w(0. .. ..), %w(00 .. ..), 
+    %w(.0 00 0.), %w(0. .0 ..), %w(0. 00 0.), %w(.0 0. 0.), %w(.. 00 .0)
+    assert_equal expected, @night_write1.translate_to_braille(longest_string)
   end
 end
