@@ -23,12 +23,15 @@ module Dictionary
   def translate_to_braille(string)
     hash = translation_hash
     braille_array = []
-    string.each_char do |char|
+    string.each_char.with_index do |char, idx|
       if char.match(/[A-Z]/)
         braille_array << hash["capital"]
         braille_array << hash[char.downcase]
+      elsif char.match(/\d/)
+        braille_array << hash["numbers"] if string[idx - 1].match(/\D/) || idx == 0
+        braille_array << hash[char]
       else
-      braille_array << hash[char]
+        braille_array << hash[char]
       end
     end
     braille_array
