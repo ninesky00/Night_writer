@@ -114,7 +114,16 @@ class NightWriteTest < MiniTest::Test
   end
 
   def test_total_extra_space_count
+    num_string = "5523"
+    assert_equal 1, @night_write4.additional_character_count(num_string)
+    caps_string = "Hello World"
+    assert_equal 2, @night_write4.additional_character_count(caps_string)
     funkier_string = "H32Uops ae32"
     assert_equal 4, @night_write4.additional_character_count(funkier_string)
+  end
+
+  def test_can_write_integrated_long_string_with_numbers_and_letters
+    longest_string = "This Is Going Bo Be Longer Than 41 Characters."
+
   end
 end
