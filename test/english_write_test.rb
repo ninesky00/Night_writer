@@ -5,9 +5,10 @@ require './lib/night_read'
 
 class EnglishWriteTest < MiniTest::Test
   def setup
-    @file1 = "./sample_text/sample_english.txt"
-    @file2 = "./sample_text/sample_braille.txt"
-    @file3 = "./sample_text/test_file2.txt"
+    @file1 = "./sample_text/hello_world.txt"
+    @file2 = "./sample_text/br_hello.txt"
+    @file3 = "./sample_text/br_long_string.txt"
+    @file4 = "./sample_text/br_longest_string.txt"
     @english_write = EnglishWrite.new(@file1)
     @reader = NightRead.new
     @braille_text = @reader.read(@file2)
@@ -17,6 +18,7 @@ class EnglishWriteTest < MiniTest::Test
     assert_instance_of EnglishWrite, @english_write
   end
 
+  #dictionary tests
   def test_can_translate_one_braille_to_english
     @braille_text = "0.\n00\n..\n"
     assert_equal "h", @english_write.translate_to_english(@braille_text)
@@ -45,7 +47,23 @@ class EnglishWriteTest < MiniTest::Test
   end
 
   def test_can_translate_long_braille_string_to_english
-    @braille_text = @reader.read(@file3)
-    assert_equal "this is a forty-one character string test", @english_write.translate_to_english(@braille_text)
+    braille_text = @reader.read(@file3)
+    assert_equal "this is a forty-one character string test", @english_write.translate_to_english(braille_text)
+  end
+
+  def test_can_translate_longest_braille_string_to_english
+    braille_text = @reader.read(@file4)
+    assert_equal "This Is Going To Be Longer Than 9 Characters.", @english_write.translate_to_english(braille_text)
+  end
+
+  def test_can_write_english_to_destination
+    braille_text = "..0.0.0.0.0......00.0.0.00
+    ..00.00.0..0....00.0000..0
+    .0....0.0.0....0.00.0.0..."
+    @english_write.write(braille_text)
+    actual = File.open(@file1, "r") do |file|
+      file.read()
+    end
+    assert_equal "Hello World", actual
   end
 end

@@ -1,6 +1,6 @@
 module Dictionary
   def translation_hash
-  translation_hash = {
+    {
     "a" => %w(0. .. ..), "b" => %w(0. 0. ..), "c" => %w(00 .. ..),
     "d" => %w(00 .0 ..), "e" => %w(0. .0 ..), "f" => %w(00 0. ..),
     "g" => %w(00 00 ..), "h" => %w(0. 00 ..), "i" => %w(.0 0. ..),
@@ -12,19 +12,36 @@ module Dictionary
     "y" => %w(00 .0 00), "z" => %w(0. .0 00), "!" => %w(.. 00 0.),
     "'" => %w(.. .. 0.), "," => %w(.. 0. ..), "-" => %w(.. .. 00),
     "." => %w(.. 00 .0), "?" => %w(.. 0. 00), " " => %w(.. .. ..),
-    "numbers" => %w(.0 .0 00), "capital" => %w(.. .. .0)
-                          }
+    "numbers" => %w(.0 .0 00), "capital" => %w(.. .. .0),
+    "1" => %w(0. .. ..), "2" => %w(0. 0. ..), "3" => %w(00 .. ..),
+    "4" => %w(00 .0 ..), "5" => %w(0. .0 ..), "6" => %w(00 0. ..),
+    "7" => %w(00 00 ..), "8" => %w(0. 00 ..), "9" => %w(.0 0. ..),
+    "0" => %w(.0 00 ..)
+    }
+  end
+
+  def number_hash
+    {
+    "1" => %w(0. .. ..), "2" => %w(0. 0. ..), "3" => %w(00 .. ..),
+    "4" => %w(00 .0 ..), "5" => %w(0. .0 ..), "6" => %w(00 0. ..),
+    "7" => %w(00 00 ..), "8" => %w(0. 00 ..), "9" => %w(.0 0. ..),
+    "0" => %w(.0 00 ..)
+    }
   end
 
   def translate_to_braille(string)
     hash = translation_hash
     braille_array = []
-    string.each_char do |char|
+    string.each_char.with_index do |char, idx|
       if char.match(/[A-Z]/)
         braille_array << hash["capital"]
         braille_array << hash[char.downcase]
+        #only captures shift letters at the moment, does not capture caps lock
+      elsif char.match(/\d/)
+        braille_array << hash["numbers"] if string[idx - 1].match(/\D/) || idx == 0
+        braille_array << hash[char]
       else
-      braille_array << hash[char]
+        braille_array << hash[char]
       end
     end
     braille_array
@@ -32,9 +49,16 @@ module Dictionary
 
   def translate_to_english(braille_string)
     hash = translation_hash
+    num_hash = number_hash
     braille_letters = transpose_letters(braille_string)
-    letters_array = braille_letters.map do |letter|
-      hash.key(letter)
+    letters_array = braille_letters.each.with_index.map do |letter, idx|
+      if hash.key(letter) == "numbers"
+        next
+      elsif hash.key(braille_letters[idx - 1]) == "numbers"
+        num_hash.key(letter)
+      else
+        hash.key(letter)
+      end
     end
     letters_array.join.gsub(/capital./) {|match| match[-1].upcase}
     #only captures shift letters at the moment, does not capture caps lock
@@ -62,6 +86,6 @@ module Dictionary
   
   def transpose_letters(braille_string)
     pairs = braille_pairs(braille_string)
-    braille_letters = pairs[0].zip(pairs[1], pairs[2])
+    pairs[0].zip(pairs[1], pairs[2])
   end
 end
