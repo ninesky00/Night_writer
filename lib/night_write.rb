@@ -20,13 +20,18 @@ class NightWrite
     writing_string = line1 + "\n" + line2 + "\n" + line3 + "\n"
   end
 
+  def upcase_count(string)
+    string.scan(/[A-Z]/).count
+  end
+
   def formatted_writing(string)
-    if string.length <= 40
+    #what is the proper syntax for below, seems convaluted
+    if string.length <= (40 - upcase_count(string))
       output = convert_to_write(string)
       write(output, @destination)
     else 
-      first40 = string.slice(0..39)
-      rest = string.slice(40..-1)
+      first40 = string.slice(0..(39 - upcase_count(string)))
+      rest = string.slice((40 - upcase_count(string))..-1)
       formatted_writing(first40)
       formatted_writing(rest)
     end

@@ -12,7 +12,7 @@ module Dictionary
     "y" => %w(00 .0 00), "z" => %w(0. .0 00), "!" => %w(.. 00 0.),
     "'" => %w(.. .. 0.), "," => %w(.. 0. ..), "-" => %w(.. .. 00),
     "." => %w(.. 00 .0), "?" => %w(.. 0. 00), " " => %w(.. .. ..),
-    "numbers" => %w(.0 .0 00)
+    "numbers" => %w(.0 .0 00), "capital" => %w(.. .. .0)
                           }
   end
 
@@ -20,7 +20,12 @@ module Dictionary
     hash = translation_hash
     braille_array = []
     string.each_char do |char|
+      if char.match(/[A-Z]/)
+        braille_array << hash["capital"]
+        braille_array << hash[char.downcase]
+      else
       braille_array << hash[char]
+      end
     end
     braille_array
   end
@@ -31,7 +36,8 @@ module Dictionary
     letters_array = braille_letters.map do |letter|
       hash.key(letter)
     end
-    letters_array.join
+    letters_array.join.gsub(/capital./) {|match| match[-1].upcase}
+    #only captures shift letters at the moment, does not capture caps lock
   end
 
   def three_line_braille(braille_string)
