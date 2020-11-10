@@ -8,12 +8,10 @@ class NightWriteTest < MiniTest::Test
     @output_file2 = "./sample_text/output_file2.txt"
     @output_file3 = "./sample_text/output_file3.txt"
     @output_file4 = "./sample_text/output_file4.txt"
-    @output_file5 = "./sample_text/output_file5.txt"
     @night_write1 = NightWrite.new(@output_file1)
     @night_write2 = NightWrite.new(@output_file2)
     @night_write3 = NightWrite.new(@output_file3)
     @night_write4 = NightWrite.new(@output_file4)
-    @night_write5 = NightWrite.new(@output_file5)
     #added class instances for the purpose of using file apend instead of file write,
     #need some more time to figure out how to code them interchangeably
     @braille_text = "0.0.0.0.0.\n00.00.0..0\n....0.0.0.\n"
