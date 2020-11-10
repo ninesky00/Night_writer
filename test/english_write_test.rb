@@ -1,7 +1,4 @@
-require 'minitest/autorun'
-require 'minitest/pride'
-require './lib/english_write'
-require './lib/night_read'
+require_relative 'test_helper'
 
 class EnglishWriteTest < MiniTest::Test
   def setup
