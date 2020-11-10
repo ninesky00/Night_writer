@@ -21,15 +21,11 @@ class NightWrite
   end
 
   def upcase_count(string)
-    upcase_count, space_count = 0, 0
-    string.chars do |char|
-      upcase_count += 1 if char == char.upcase
-      space_count += 1 if char == " "
-    end
-    total_count = upcase_count - space_count
+    string.scan(/[A-Z]/).count
   end
 
   def formatted_writing(string)
+    #what is the proper syntax for below, seems convaluted
     if string.length <= (40 - upcase_count(string))
       output = convert_to_write(string)
       write(output, @destination)
