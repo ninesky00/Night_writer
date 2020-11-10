@@ -34,6 +34,10 @@ class NightWrite
     count
   end
 
+  def additional_character_count(string)
+    upcase_count(string) + number_switch_count(string)
+  end
+
   def formatted_writing(string)
     #what is the proper syntax for below, seems convaluted
     if string.length <= (40 - upcase_count(string) - number_switch_count(string))

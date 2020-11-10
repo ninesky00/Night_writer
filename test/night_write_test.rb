@@ -112,4 +112,9 @@ class NightWriteTest < MiniTest::Test
     funky_string = "h32uoen5 ap244"
     assert_equal 3, @night_write4.number_switch_count(funky_string)
   end
+
+  def test_total_extra_space_count
+    funkier_string = "H32Uops ae32"
+    assert_equal 4, @night_write4.additional_character_count(funkier_string)
+  end
 end
