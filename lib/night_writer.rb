@@ -7,10 +7,10 @@ reader = NightRead.new
 night_writer = NightWrite.new(output)
 english_writer = EnglishWrite.new(output)
 text = reader.read(input)
-if text.match(/0.+/)
+if text.match(/00+/) || text.match(/0.+/)
   english_writer.write(text)
   puts "Created '#{ARGV[1]}' containing #{text.length} characters"
-elsif text.match(/\w/)
+elsif
   night_writer.formatted_writing(text)
   puts "Created '#{ARGV[1]}' containing #{text.length} characters"
 end
