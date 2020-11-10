@@ -7,10 +7,12 @@ class NightWriteTest < MiniTest::Test
     @output_file1 = "./sample_text/output_file1.txt"
     @output_file2 = "./sample_text/output_file2.txt"
     @output_file3 = "./sample_text/output_file3.txt"
+    @output_file4 = "./sample_text/output_file4.txt"
     @night_write1 = NightWrite.new(@output_file1)
     @night_write2 = NightWrite.new(@output_file2)
     @night_write3 = NightWrite.new(@output_file3)
-    #added multiple classes for the purpose of using file apend instead of file write,
+    @night_write4 = NightWrite.new(@output_file4)
+    #added class instances for the purpose of using file apend instead of file write,
     #need some more time to figure out how to code them interchangeably
     @braille_text = "0.0.0.0.0.\n00.00.0..0\n....0.0.0.\n"
   end
@@ -90,5 +92,15 @@ class NightWriteTest < MiniTest::Test
     num_string = "5523"
     expected = %w(.0 .0 00), %w(0. .0 ..), %w(0. .0 ..), %w(0. 0. ..), %w(00 .. ..)
     assert_equal expected, @night_write1.translate_to_braille(num_string)
+  end
+
+  def test_can_write_numbers_to_braille
+    num_string = "5523"
+    @night_write4.formatted_writing(num_string)
+    expected = ".00.0.0.00\n.0.0.00...\n00........\n"
+    actual = File.open(@output_file4, "r") do |file|
+      file.read()
+    end
+    assert_equal expected, actual
   end
 end
