@@ -53,6 +53,17 @@ class EnglishWriteTest < MiniTest::Test
 
   def test_can_translate_longest_braille_string_to_english
     braille_text = @reader.read(@file4)
-    assert_equal "This Is Going To Be Longer Than 41 Characters.", @english_write.translate_to_english(braille_text)
+    assert_equal "This Is Going To Be Longer Than 9 Characters.", @english_write.translate_to_english(braille_text)
+  end
+
+  def test_can_write_english_to_destination
+    braille_text = "..0.0.0.0.0......00.0.0.00
+    ..00.00.0..0....00.0000..0
+    .0....0.0.0....0.00.0.0..."
+    @english_write.write(braille_text)
+    actual = File.open(@file1, "r") do |file|
+      file.read()
+    end
+    assert_equal "Hello World", actual
   end
 end

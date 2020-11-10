@@ -123,7 +123,7 @@ class NightWriteTest < MiniTest::Test
   end
 
   def test_can_translate_integrated_long_string_with_numbers_and_letters
-    longest_string = "This Is Going To Be Longer Than 41 Characters."
+    longest_string = "This Is Going To Be Longer Than 9 Characters."
     expected = %w(.. .. .0), %w(.0 00 0.), %w(0. 00 ..), %w(.0 0. ..), %w(.0 0. 0.), 
     %w(.. .. ..), %w(.. .. .0), %w(.0 0. ..), %w(.0 0. 0.), 
     %w(.. .. ..), %w(.. .. .0), %w(00 00 ..), %w(0. .0 0.), %w(.0 0. ..), %w(00 .0 0.), %w(00 00 ..), 
@@ -131,7 +131,7 @@ class NightWriteTest < MiniTest::Test
     %w(.. .. ..), %w(.. .. .0), %w(0. 0. ..), %w(0. .0 ..), 
     %w(.. .. ..), %w(.. .. .0), %w(0. 0. 0.), %w(0. .0 0.), %w(00 .0 0.), %w(00 00 ..), %w(0. .0 ..), %w(0. 00 0.), 
     %w(.. .. ..), %w(.. .. .0), %w(.0 00 0.), %w(0. 00 ..), %w(0. .. ..), %w(00 .0 0.), 
-    %w(.. .. ..), %w(.0 .0 00), %w(00 .0 ..), %w(0. .. ..), 
+    %w(.. .. ..), %w(.0 .0 00), %w(.0 0. ..), 
     %w(.. .. ..), %w(.. .. .0), %w(00 .. ..), %w(0. 00 ..), %w(0. .. ..), %w(0. 00 0.), %w(0. .. ..), %w(00 .. ..), 
     %w(.0 00 0.), %w(0. .0 ..), %w(0. 00 0.), %w(.0 0. 0.), %w(.. 00 .0)
     assert_equal expected, @night_write1.translate_to_braille(longest_string)
