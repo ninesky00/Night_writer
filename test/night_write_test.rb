@@ -107,5 +107,9 @@ class NightWriteTest < MiniTest::Test
   def test_can_count_amount_of_number_switches
     num_string = "5523"
     assert_equal 1, @night_write4.number_switch_count(num_string)
+    caps_string = "Hello World"
+    assert_equal 0, @night_write4.number_switch_count(caps_string)
+    funky_string = "h32uoen5 ap244"
+    assert_equal 3, @night_write4.number_switch_count(funky_string)
   end
 end
