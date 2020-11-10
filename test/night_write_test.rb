@@ -1,6 +1,4 @@
-require 'minitest/autorun'
-require 'minitest/pride'
-require './lib/night_write'
+require_relative 'test_helper'
 
 class NightWriteTest < MiniTest::Test
   def setup
